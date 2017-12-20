@@ -304,3 +304,16 @@ function! s:ErrorCheck()
         return 1
     endif
 endfunction
+
+function! racer#Describe()
+    let fname = expand('%:p')
+    let tmpfname = tempname()
+    call writefile(getline(1, '$'), tmpfname)
+    let col = col('.') - 1
+    let cmd = racer#GetRacerCmd() . ' find-definition ' .
+        \ line('.') . ' ' . col . ' ' . fname . ' ' . tmpfname
+    let res = system(cmd)
+    let def = split(res, ',')[-1]
+    let def = split(def, '\n')[0]
+    echo def
+endfunction
