@@ -15,6 +15,6 @@ nnoremap <silent><buffer> <Plug>(rust-def-vertical)
 nnoremap <silent><buffer> <Plug>(rust-doc)
         \ :call racer#ShowDocumentation()<CR>
 nnoremap <silent><buffer> <Plug>(rust-desc)
-        \ :call racer#Describe()<CR>
+        \ :call racer#Describe()<CR><CR>
 
 setlocal omnifunc=racer#RacerComplete

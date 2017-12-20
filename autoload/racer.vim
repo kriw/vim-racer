@@ -312,8 +312,13 @@ function! racer#Describe()
     let col = col('.') - 1
     let cmd = racer#GetRacerCmd() . ' find-definition ' .
         \ line('.') . ' ' . col . ' ' . fname . ' ' . tmpfname
-    let res = system(cmd)
-    let def = split(res, ',')[-1]
-    let def = split(def, '\n')[0]
-    echo def
+    let lst = split(system(cmd), ',')
+    if len(lst) > 5
+        let type = lst[4]
+        let def = join(lst[5:], '')
+        let def = split(def, '\n')[0]
+        echo type . ', ' . def
+    else
+        echo join(lst, '')
+    endif
 endfunction
